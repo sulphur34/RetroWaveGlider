@@ -47,7 +47,7 @@ public class ColorHandler : MonoBehaviour
     {
         float hueAdditionValue = 0;
         float hueMaxValue = 1;
-        float step = 0.1f;
+        float step = 0.01f;
 
         while (hueAdditionValue < hueMaxValue)
         {
@@ -102,12 +102,12 @@ public class ColorHandler : MonoBehaviour
     {
         Debug.Log(index);
         _schemeIndex = index;
-        _nextSchemeIndex = _nextSchemeIndex < _colorSchemes.Length - 1 ? index++ : 0;
+        _nextSchemeIndex = _nextSchemeIndex < _colorSchemes.Length - 1 ? index+=1 : 0;
     }
 
     private void IncreaseIndex()
     {        
-        int index = _schemeIndex < _colorSchemes.Length - 1 ? _schemeIndex++ : 0;
+        int index = _schemeIndex < _colorSchemes.Length - 1 ? _schemeIndex+=1 : 0;
         SetIndex(index);
     }
 }

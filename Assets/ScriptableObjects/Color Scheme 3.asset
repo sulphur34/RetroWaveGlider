@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2537061b2014e41bb386decbac7d59, type: 3}
   m_Name: Color Scheme 3
   m_EditorClassIdentifier: 
-  _playerSpaceShipColor: {r: 0.9490197, g: 0.80392164, b: 0.627451, a: 1}
-  _enemyColorOne: {r: 0.9490197, g: 0.5529412, b: 0.20784315, a: 1}
-  _enemyColorTwo: {r: 0.854902, g: 0.34509805, b: 0.050980397, a: 1}
-  _backGroundColor: {r: 0.07058824, g: 0.5921569, b: 0.6509804, a: 1}
-  _obstaclesColor: {r: 0.6509804, g: 0.29411766, b: 0.21960786, a: 1}
+  _colors:
+  - {r: 0.9168627, g: 0.9490196, b: 0.627451, a: 1}
+  - {r: 0.854902, g: 0.34509805, b: 0.050980397, a: 1}
+  - {r: 0.9490197, g: 0.5529412, b: 0.20784315, a: 1}
+  - {r: 0.07058824, g: 0.5921569, b: 0.6509804, a: 1}
+  - {r: 0.6509804, g: 0.29411766, b: 0.21960786, a: 1}
