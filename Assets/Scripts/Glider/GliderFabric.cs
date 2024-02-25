@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GliderFabric : MonoBehaviour
 {
-    [SerializeField] Glider[] _gliderPrefabs;
+    [SerializeField] Glider _glider;
 
     ColorHandler _colorHandler;
 
@@ -12,11 +12,10 @@ public class GliderFabric : MonoBehaviour
         _colorHandler = colorHandler;
     }
 
-    public Glider Build()
-    {
-        Glider newGlider = Instantiate(_gliderPrefabs[0]);
-        ColorTracker colorTracker = newGlider.AddComponent<ColorTracker>();
-        colorTracker.Initialize(_colorHandler.GetColorData(ColorNames.Glider));
-        return newGlider;
-    }
+    //public Glider Build()
+    //{
+    //    Glider newGlider = Instantiate(_gliderPrefabs[0]);
+    //    newGlider.Initialize();
+    //    return newGlider;
+    //}
 }
