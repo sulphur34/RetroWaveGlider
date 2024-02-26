@@ -5,7 +5,7 @@ public class RandomScenario : Scenario
     protected override void GenerateTerrain(TerrainMesh terrainMesh, float ancorPosition, float minConstrain, float maxConstrain)
     {
         Vector3 lastVertice = terrainMesh.LastVertice;
-        float offsetValue = 0.25f;
+        float offsetValue = 0.1f;
         float newXPosition = lastVertice.x + _xDelta;
         float newYPosition = lastVertice.y + Random.Range(-offsetValue, offsetValue);
         newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);

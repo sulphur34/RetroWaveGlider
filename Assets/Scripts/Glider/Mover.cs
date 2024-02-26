@@ -25,15 +25,15 @@ public class Mover : MonoBehaviour
         _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime);
+        _rigidbody.MoveRotation(Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime));
     }
 
     public void AddVerticalVelocity()
     {
         _rigidbody.velocity = _zeroVerticalVelocity;
-        transform.rotation = _maxRotation;
+        _rigidbody.AddTorque(20f);
         _rigidbody.AddForce(Vector2.up * _tapForce, ForceMode2D.Force);
     }
 
