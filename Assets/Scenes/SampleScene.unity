@@ -446,7 +446,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1586906111177774380, guid: 6d3374d6d3cdc8241a51a6365bd24655, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1586906111177774380, guid: 6d3374d6d3cdc8241a51a6365bd24655, type: 3}
       propertyPath: m_LocalPosition.x
@@ -879,6 +879,9 @@ MonoBehaviour:
   - {fileID: 517329549}
   - {fileID: 1618119575}
   - {fileID: 2146990910}
+  _scenarioHandler: {fileID: 1015205306}
+  _terrainMeshLow: {fileID: 1618119574}
+  _terrainMeshUp: {fileID: 2146990909}
 --- !u!4 &750006349
 Transform:
   m_ObjectHideFlags: 0
@@ -893,6 +896,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1015205305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1015205307}
+  - component: {fileID: 1015205306}
+  m_Layer: 0
+  m_Name: ScenarioHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1015205306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015205305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284f02db2792c834c814ff7099f3ba62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scenarios:
+  - {fileID: 1365320791}
+  - {fileID: 1708968213}
+--- !u!4 &1015205307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015205305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 103.10672, y: -0.2567201, z: -8.116138}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1708968212}
+  - {fileID: 1365320792}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054374908
 GameObject:
@@ -1007,7 +1059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1365320791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,9 +1072,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22415f8488e26546bde81e30731bb8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _terrainMeshLow: {fileID: 1618119574}
-  _terrainMeshUp: {fileID: 2146990909}
-  _cameraData: {fileID: 519420034}
 --- !u!4 &1365320792
 Transform:
   m_ObjectHideFlags: 0
@@ -1030,13 +1079,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365320790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -103.10672, y: 0.2567201, z: 8.116138}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_Father: {fileID: 1015205307}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571965954
 GameObject:
@@ -1492,15 +1541,30 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1708968212}
-  - component: {fileID: 1708968211}
+  - component: {fileID: 1708968213}
   m_Layer: 0
-  m_Name: BlockScenario
+  m_Name: StalagmireScenario
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1708968211
+--- !u!4 &1708968212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708968210}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -103.10672, y: 0.2567201, z: 8.116138}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1015205307}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1708968213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1512,28 +1576,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158367f2ac9b4304db8e673b81dc3cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _terrainMeshLow: {fileID: 1618119574}
-  _terrainMeshUp: {fileID: 2146990909}
-  _cameraData: {fileID: 519420034}
-  _xDelta: 0
-  _yDelta: 0
-  _minGap: 0
-  _isSameHeight: 0
---- !u!4 &1708968212
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708968210}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715228474
 GameObject:
   m_ObjectHideFlags: 0

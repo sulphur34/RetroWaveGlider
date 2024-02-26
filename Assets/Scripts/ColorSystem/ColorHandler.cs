@@ -49,7 +49,6 @@ public class ColorHandler : MonoBehaviour
 
         while (hueAdditionValue < hueMaxValue)
         {
-            Debug.Log("Coroutine in");
             hueAdditionValue += step * Time.deltaTime;
 
             foreach (ColorData colorData in _colorsData.Values)
@@ -60,7 +59,6 @@ public class ColorHandler : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        Debug.Log("Coroutine out");
         Transit();
     }
 
@@ -98,7 +96,6 @@ public class ColorHandler : MonoBehaviour
 
     private void SetIndex(int index)
     {
-        Debug.Log(index);
         _schemeIndex = index;
         _nextSchemeIndex = _nextSchemeIndex < _colorSchemes.Length - 1 ? index += 1 : 0;
     }
