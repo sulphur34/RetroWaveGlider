@@ -9,28 +9,27 @@ using UnityEngine;
 public class TerrainMesh : MonoBehaviour
 {
     private int _xSize;    
-    private int _ySize;
+    private int _ySize = 1;
     private Mesh _mesh;
     private MeshFilter _meshFilter;
     private MeshRenderer _meshRenderer;
     private Vector3[] _verticies;
-    private int[] _triangles;
-    private float _xDelta;
-    private float _yDelta;
     private EdgeCollider2D _polygonCollider;
+    private int[] _triangles;
 
+    public float XDelta { get; private set; }
+    public float YDelta { get; private set; }
     public float YStart { get; private set; }
     public float XStart { get; private set; }
     public Vector3 LastVertice => _verticies.Last();
 
-    public void Initialize(float xStart, float yStart, float xDelta, float yDelta, int xSize, int ySize = 1)
+    public void Initialize(TerrainData terrainData)
     {
-        _ySize = ySize;
-        _xSize = xSize;
-        _xDelta = xDelta;
-        _yDelta = yDelta;
-        XStart = xStart;
-        YStart = yStart;
+        _xSize = terrainData.XSize;
+        XDelta = terrainData.XDelta;
+        YDelta = terrainData.YDelta;
+        XStart = terrainData.XStart;
+        YStart = terrainData.YStart;
         _polygonCollider = GetComponent<EdgeCollider2D>();
         _meshFilter = GetComponent<MeshFilter>();
         _meshRenderer = GetComponent<MeshRenderer>();
@@ -57,7 +56,7 @@ public class TerrainMesh : MonoBehaviour
     public void RemoveEdge(List<Vector3> verticies)
     {
         RemoveFromList(verticies);
-        XStart += _xDelta;
+        XStart += XDelta;
         _xSize--;
     }
 
@@ -91,12 +90,12 @@ public class TerrainMesh : MonoBehaviour
         for (int i = 0, iy = 0; iy <= _ySize; iy++)
         {
             float x = XStart;
-            for (int ix = 0; ix <= _xSize; i++, ix++, x += _xDelta)
+            for (int ix = 0; ix <= _xSize; i++, ix++, x += XDelta)
             {
                 _verticies[i] = new Vector2(x, y);
             }
 
-            y += _yDelta;
+            y += YDelta;
         }
     }
 

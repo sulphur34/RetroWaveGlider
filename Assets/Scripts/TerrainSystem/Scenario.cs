@@ -2,30 +2,23 @@ using System.Collections;
 using UnityEngine;
 
 public abstract class Scenario : MonoBehaviour
-{
-    private TerrainMesh _terrainMeshLow;
-    private TerrainMesh _terrainMeshUp;
+{    
+    private TerrainMesh _terrainMesh;
     private CameraData _cameraData;
-    protected float _xDelta;
-    protected float _yDelta;
-    private float _minGap;
     private Coroutine _coroutine;
+    private float _lowerLimit;
+    private float _upperLimit;
 
-    public virtual void Initialize(TerrainMesh terrainMeshLow, TerrainMesh terrainMeshUp, CameraData cameraData)
+    public virtual void Initialize(TerrainMesh terrainMesh, CameraData cameraData)
     {
-        _minGap = 2;
-        _xDelta = 0.25f;
         _cameraData = cameraData;
-        int blockSize = Mathf.RoundToInt(_cameraData.Width / _xDelta) + 7;
-        _yDelta = 0.25f;
-        _terrainMeshLow = terrainMeshLow;
-        _terrainMeshUp = terrainMeshUp;
-        _terrainMeshLow.Initialize(_cameraData.LeftBorder - 1, _cameraData.LowerBorder, _xDelta, _yDelta, blockSize);
-        _terrainMeshUp.Initialize(_cameraData.LeftBorder - 1, _cameraData.UpperBorder, _xDelta, -_yDelta, blockSize);
+        _terrainMesh = terrainMesh;
     }
 
-    public void Activate()
+    public void Activate(float lowerLimit, float upperLimit)
     {
+        _lowerLimit = lowerLimit;
+        _upperLimit = upperLimit;
         _coroutine = StartCoroutine(Generate());
     }
 
@@ -43,20 +36,14 @@ public abstract class Scenario : MonoBehaviour
 
         while (isContinue)
         {
-            if (_cameraData.LeftBorder - 1 > _terrainMeshLow.XStart)
+            if (_cameraData.LeftBorder - 1 > _terrainMesh.XStart)
             {
-                GenerateTerrains();
+                GenerateTerrain(_terrainMesh, _lowerLimit, _upperLimit);
             }
 
             yield return null;
         }
     }
 
-    protected virtual void GenerateTerrains()
-    {
-        GenerateTerrain(_terrainMeshLow, _cameraData.LowerBorder, _terrainMeshLow.YStart + _yDelta, -_minGap / 2);
-        GenerateTerrain(_terrainMeshUp, _cameraData.UpperBorder, _minGap / 2, _terrainMeshUp.YStart - _yDelta);
-    }
-
-    protected abstract void GenerateTerrain(TerrainMesh terrainMesh, float ancorPosition, float minConstrain, float maxConstrain);
+    protected abstract void GenerateTerrain(TerrainMesh terrainMesh, float lowerLimit, float upperLimit);
 }

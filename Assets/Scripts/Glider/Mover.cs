@@ -33,7 +33,7 @@ public class Mover : MonoBehaviour
     public void AddVerticalVelocity()
     {
         _rigidbody.velocity = _zeroVerticalVelocity;
-        _rigidbody.AddTorque(20f);
+        _rigidbody.AddTorque(40f);
         _rigidbody.AddForce(Vector2.up * _tapForce, ForceMode2D.Force);
     }
 

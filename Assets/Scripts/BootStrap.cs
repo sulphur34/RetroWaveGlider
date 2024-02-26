@@ -6,6 +6,7 @@ public class BootStrap : MonoBehaviour
     [SerializeField] private CameraData _cameraData;
     [SerializeField] private ColorTracker[] _colorTrackers;
     [SerializeField] private ScenarioHandler _scenarioHandler;
+    [SerializeField] private ScenarioHandler _scenarioHandler2;
     [SerializeField] private TerrainMesh _terrainMeshLow;
     [SerializeField] private TerrainMesh _terrainMeshUp; 
 
@@ -17,6 +18,7 @@ public class BootStrap : MonoBehaviour
         foreach (ColorTracker tracker in _colorTrackers)
             tracker.Initialize();
 
-        _scenarioHandler.Initialize(_terrainMeshLow, _terrainMeshUp, _cameraData);
+        _scenarioHandler.Initialize(_terrainMeshLow, _cameraData);
+        _scenarioHandler2.Initialize(_terrainMeshUp, _cameraData);
     }
 }
