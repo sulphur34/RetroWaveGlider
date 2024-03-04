@@ -1,4 +1,7 @@
-public interface IColorable
+namespace Assets.Scripts.ColorSystem
 {
-    public void Initialize(IColorData colorData);
+    public interface IColorable
+    {
+        public void Initialize(IColorData colorData);
+    }
 }

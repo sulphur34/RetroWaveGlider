@@ -1,31 +1,34 @@
 using UnityEngine;
 
-public class StalagmiteScenario : Scenario
+namespace Assets.Scripts.TerrainSystem
 {
-    private bool _isSameHeight = false;
-
-    protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
+    public class StalagmiteScenario : Scenario
     {
-        Vector3 lastVertice = terrainMesh.LastVertice;
-        Vector3 verticie1;
-        Vector3 verticie2;
-        float offsetValue = 2f;
-        float newXPosition = lastVertice.x + terrainMesh.XDelta;
+        private bool _isSameHeight = false;
 
-        if (_isSameHeight)
+        protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
         {
-            verticie1 = new Vector3(newXPosition, terrainMesh.YStart);
-            verticie2 = new Vector3(newXPosition, lastVertice.y);
-        }
-        else
-        {
-            float newYPosition = lastVertice.y + Random.Range(-offsetValue, offsetValue);
-            newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
-            verticie1 = new Vector3(newXPosition, terrainMesh.YStart);
-            verticie2 = new Vector3(newXPosition, newYPosition);
-        }
+            Vector3 lastVertex = terrainMesh.LastVertex;
+            Vector3 vertex1;
+            Vector3 vertex2;
+            float offsetValue = Random.Range(0.25f, 1f);
+            float newXPosition = lastVertex.x + terrainMesh.XDelta;
 
-        terrainMesh.MoveMesh(verticie1, verticie2);
-        _isSameHeight = _isSameHeight ? false : true;
+            if (_isSameHeight)
+            {
+                vertex1 = new Vector3(newXPosition, terrainMesh.YStart);
+                vertex2 = new Vector3(newXPosition, lastVertex.y);
+            }
+            else
+            {
+                float newYPosition = lastVertex.y + Random.Range(-offsetValue, offsetValue);
+                newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
+                vertex1 = new Vector3(newXPosition, terrainMesh.YStart);
+                vertex2 = new Vector3(newXPosition, newYPosition);
+            }
+
+            terrainMesh.MoveMesh(vertex1, vertex2);
+            _isSameHeight = !_isSameHeight;
+        }
     }
 }

@@ -1,18 +1,21 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class ColorTrackerSprite : ColorTracker
+namespace Assets.Scripts.ColorSystem.ColorTracker
 {
-    private SpriteRenderer _spriteRenderer;
-
-    public override void Initialize()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class ColorTrackerSprite : ColorTracker
     {
-        base.Initialize();
-    }
+        private SpriteRenderer _spriteRenderer;
 
-    protected override void SetTracker()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        ColorData.ColorChanged += (color) => _spriteRenderer.color = color;
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
+
+        protected override void SetTracker()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            ColorData.ColorChanged += (color) => _spriteRenderer.color = color;
+        }
     }
 }

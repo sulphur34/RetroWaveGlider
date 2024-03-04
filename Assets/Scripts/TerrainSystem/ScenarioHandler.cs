@@ -1,77 +1,80 @@
+using System.Collections;
 using UnityEngine;
 
-public class ScenarioHandler : MonoBehaviour
+namespace Assets.Scripts.TerrainSystem
 {
-    [SerializeField] private bool isGround;
-    [SerializeField] private float _swichDelay;
-
-    private Scenario[] _scenarios;
-    private TerrainMesh _terrainMesh;
-    private ScenarioData _scenarioData;
-    private CameraData _cameraData;
-    private TerrainData _terrainData;
-    private int _currentScenarioIndex = 0;
-    private float _timePassed = 0;
-    private float _lowerLimit;
-    private float _upperLimit;
-
-    public void Initialize(TerrainMesh terrainMesh, CameraData cameraData)
+    public class ScenarioHandler : MonoBehaviour
     {
-        _cameraData = cameraData;
-        _terrainMesh = terrainMesh;
-        SetTerrainMesh();
-        _scenarios = GetComponentsInChildren<Scenario>();
+        [SerializeField] private float _switchDelay;
 
-        foreach (var scenario in _scenarios)
+        private Scenario[] _scenarios;
+        private TerrainMesh _terrainMesh;
+        private CameraData _cameraData;
+        private Coroutine _coroutine;
+        private int _currentScenarioIndex;
+        private float _timePassed;
+        private float _lowerLimit;
+        private float _upperLimit;
+
+        public void Initialize(TerrainMesh terrainMesh, CameraData cameraData)
         {
-            scenario.Initialize(_terrainMesh, _cameraData);
+            _cameraData = cameraData;
+            _terrainMesh = terrainMesh;
+            _timePassed = _switchDelay;
+            SetScenarios();
         }
 
-        SetGap(3f, -2);
-        _scenarios[_currentScenarioIndex].Activate(_lowerLimit, _upperLimit);
-    }
-
-    private void Update()
-    {
-        _timePassed += Time.deltaTime;
-        if (_swichDelay <= _timePassed)
+        public void Activate(float upperLimit, float lowerLimit)
         {
-            _timePassed = 0;    
-            _scenarios[_currentScenarioIndex].Deactivate();
-            _currentScenarioIndex = _currentScenarioIndex >= _scenarios.Length - 1 ? 0 : ++_currentScenarioIndex;
-            SetGap(3f, -2);
-            _scenarios[_currentScenarioIndex].Activate(_lowerLimit, _upperLimit);
+            SetLimits(lowerLimit, upperLimit);
+            _coroutine = StartCoroutine(GeneratingTerrain());
         }
-    }
 
-    private void SetTerrainMesh()
-    {
-        float yStart;
-        float xDelta = 0.25f;
-        float yDelta = 0.25f;
-        int prewarmQuadsAmount = 7;
-        int xSize = Mathf.CeilToInt(_cameraData.Width / xDelta) + prewarmQuadsAmount;
-
-        if (isGround)
-            yStart = _cameraData.LowerBorder;
-        else
-            yStart = _cameraData.UpperBorder;
-
-        _terrainData = new TerrainData(_cameraData.LeftBorder - 1, yStart, xDelta, yDelta, xSize);
-        _terrainMesh.Initialize(_terrainData);
-    }
-
-    private void SetGap(float gapHeight, float gapOffset)
-    {
-        if (isGround)
+        public void Deactivate()
         {
-            _upperLimit = gapOffset - gapHeight / 2;
-            _lowerLimit = _terrainData.YStart + _terrainData.YDelta;
+            StopCoroutine(_coroutine);
         }
-        else
+
+        public void Refresh(float upperLimit, float lowerLimit)
         {
-            _upperLimit = _terrainData.YStart - _terrainData.YDelta; 
-            _lowerLimit = gapOffset + gapHeight / 2;
+            Deactivate();
+            Activate(upperLimit, lowerLimit);
+        }
+
+        public void SetLimits(float lowerLimit, float upperLimit)
+        {
+            _lowerLimit = lowerLimit;
+            _upperLimit = upperLimit;
+        }
+
+        private IEnumerator GeneratingTerrain()
+        {
+            bool isContinue = true;
+
+            while (isContinue)
+            {
+                _timePassed += Time.deltaTime;
+
+                if (_switchDelay <= _timePassed)
+                {
+                    _timePassed = 0;
+                    _scenarios[_currentScenarioIndex].Deactivate();
+                    _currentScenarioIndex = _currentScenarioIndex >= _scenarios.Length - 1 ? 0 : ++_currentScenarioIndex;
+                    _scenarios[_currentScenarioIndex].Activate(_lowerLimit, _upperLimit);
+                }
+
+                yield return null;
+            }
+        }
+
+        private void SetScenarios()
+        {
+            _scenarios = GetComponentsInChildren<Scenario>();
+
+            foreach (var scenario in _scenarios)
+            {
+                scenario.Initialize(_terrainMesh, _cameraData);
+            }
         }
     }
 }

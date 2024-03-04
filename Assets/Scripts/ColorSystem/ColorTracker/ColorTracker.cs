@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public abstract class ColorTracker : MonoBehaviour
+namespace Assets.Scripts.ColorSystem.ColorTracker
 {
-    [SerializeField] private ColorHandler colorHandler;
-
-    protected string ColorName;
-    protected IColorData ColorData;
-
-    public virtual void Initialize()
+    public abstract class ColorTracker : MonoBehaviour
     {
-        ColorData = colorHandler.GetColorData(ColorName);
-    }
+        [SerializeField] private ColorHandler colorHandler;
 
-    protected abstract void SetTracker();
+        protected string ColorName;
+        protected IColorData ColorData;
+
+        public virtual void Initialize()
+        {
+            ColorData = colorHandler.GetColorData(ColorName);
+        }
+
+        protected abstract void SetTracker();
+    }
 }

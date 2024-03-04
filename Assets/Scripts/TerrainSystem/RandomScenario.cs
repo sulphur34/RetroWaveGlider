@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class RandomScenario : Scenario
+namespace Assets.Scripts.TerrainSystem
 {
-    protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
+    public class RandomScenario : Scenario
     {
-        Vector3 lastVertice = terrainMesh.LastVertice;
-        float offsetValue = Random.Range(0.1f, 0.5f);
-        float newXPosition = lastVertice.x + terrainMesh.XDelta;
-        float newYPosition = lastVertice.y + Random.Range(-offsetValue, offsetValue);
-        newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
-        Vector3 verticie1 = new Vector3(newXPosition, terrainMesh.YStart);
-        Vector3 verticie2 = new Vector3(newXPosition, newYPosition);
-        terrainMesh.MoveMesh(verticie1, verticie2);
+        protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
+        {
+            Vector3 lastVertex = terrainMesh.LastVertex;
+            float offsetValue = Random.Range(0.1f, 0.5f);
+            float newXPosition = lastVertex.x + terrainMesh.XDelta;
+            float newYPosition = lastVertex.y + Random.Range(-offsetValue, offsetValue);
+            newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
+            Vector3 vertex1 = new Vector3(newXPosition, terrainMesh.YStart);
+            Vector3 vertex2 = new Vector3(newXPosition, newYPosition);
+            terrainMesh.MoveMesh(vertex1, vertex2);
+        }
     }
 }

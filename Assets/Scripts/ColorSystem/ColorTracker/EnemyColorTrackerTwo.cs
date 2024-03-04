@@ -1,9 +1,12 @@
-public class EnemyColorTrackerTwo : ColorTrackerSprite
+namespace Assets.Scripts.ColorSystem.ColorTracker
 {
-    public override void Initialize()
+    public class EnemyColorTrackerTwo : ColorTrackerSprite
     {
-        ColorName = ColorNames.EnemyTwo;
-        base.Initialize();
-        SetTracker();
+        public override void Initialize()
+        {
+            ColorName = ColorNames.EnemyTwo;
+            base.Initialize();
+            SetTracker();
+        }
     }
 }

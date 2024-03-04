@@ -1,13 +1,13 @@
-using Agava.YandexGames;
 using System.Collections;
+using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Source.Yandex
+namespace Assets.Scripts.SDK
 {
     public sealed class SDKInitializer : MonoBehaviour
     {
-        public object ScensesNames { get; private set; }
+        public object ScenesNames { get; private set; }
 
         private void Awake()
         {

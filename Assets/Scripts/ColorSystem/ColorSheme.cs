@@ -1,27 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Color Scheme", fileName = "Color Scheme", order = 53)]
-public class ColorSheme : ScriptableObject
+namespace Assets.Scripts.ColorSystem
 {
-    [SerializeField] private Color[] _colors;
-
-    public Dictionary<string, Color> Colors { get; private set; }
-
-    public void Initialize()
+    [CreateAssetMenu(menuName = "Color Scheme", fileName = "Color Scheme", order = 53)]
+    public class ColorSheme : ScriptableObject
     {
-        Colors = GetListedColors();
-    }
+        [SerializeField] private Color[] _colors;
 
-    private Dictionary<string, Color> GetListedColors()
-    {
-        var colors = new Dictionary<string, Color>();
+        public Dictionary<string, Color> Colors { get; private set; }
 
-        for (int i = 0; i < _colors.Length; i++)
+        public void Initialize()
         {
-            colors.Add(ColorNames.Names[i], _colors[i]);
+            Colors = GetListedColors();
         }
 
-        return colors;
+        private Dictionary<string, Color> GetListedColors()
+        {
+            var colors = new Dictionary<string, Color>();
+
+            for (int i = 0; i < _colors.Length; i++)
+            {
+                colors.Add(ColorNames.Names[i], _colors[i]);
+            }
+
+            return colors;
+        }
     }
 }

@@ -1,9 +1,12 @@
-public class GliderColorTracker : ColorTrackerSprite
+namespace Assets.Scripts.ColorSystem.ColorTracker
 {
-    public override void Initialize()
+    public class GliderColorTracker : ColorTrackerSprite
     {
-        ColorName = ColorNames.Glider;
-        base.Initialize();
-        SetTracker();
+        public override void Initialize()
+        {
+            ColorName = ColorNames.Glider;
+            base.Initialize();
+            SetTracker();
+        }
     }
 }

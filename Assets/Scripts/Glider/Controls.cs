@@ -1,45 +1,53 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent (typeof(Mover))]
-public class Controls : MonoBehaviour
+namespace Assets.Scripts.Glider
 {
-    private Mover _mover;
-
-    private Coroutine _coroutine;
-
-    private void Awake()
+    [RequireComponent(typeof(Mover))]
+    public class Controls : MonoBehaviour
     {
-        Initialize();
-    }
+        private Mover _mover;
 
-    private void OnEnable()
-    {
-        _coroutine = StartCoroutine(AwaitInput());
-    }
+        private Coroutine _coroutine;
 
-    private void OnDisable()
-    {
-        StopCoroutine(_coroutine);
-    }
-
-    public void Initialize()
-    {
-        _mover = GetComponent<Mover>();
-    }
-
-    private IEnumerator AwaitInput()
-    {
-        bool isContinue = true;
-
-        while (isContinue)
+        private void Awake()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                _mover.AddVerticalVelocity();
-            }
+            Initialize();
+        }
 
-            yield return null;
+        private void OnEnable()
+        {
+            _coroutine = StartCoroutine(AwaitInput());
+        }
+
+        private void OnDisable()
+        {
+            StopCoroutine(_coroutine);
+        }
+
+        public void Initialize()
+        {
+            _mover = GetComponent<Mover>();
+        }
+
+        private IEnumerator AwaitInput()
+        {
+            bool isContinue = true;
+
+            while (isContinue)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _mover.AddVerticalVelocity();
+                }
+
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    _mover.AddHorizontalVelocity();
+                }
+
+                yield return null;
+            }
         }
     }
 }

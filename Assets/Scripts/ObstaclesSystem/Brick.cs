@@ -1,14 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class Brick : MonoBehaviour
+namespace Assets.Scripts.ObstaclesSystem
 {
-    private SpriteRenderer _spriteRenderer;
-    public float Width {  get; private set; }
-
-    private void Awake()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class Brick : MonoBehaviour
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        Width = _spriteRenderer.bounds.size.x;
+        private SpriteRenderer _spriteRenderer;
+        public float Width { get; private set; }
+
+        private void Awake()
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            Width = _spriteRenderer.bounds.size.x;
+        }
     }
 }

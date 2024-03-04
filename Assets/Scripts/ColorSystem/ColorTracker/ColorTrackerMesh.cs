@@ -1,24 +1,27 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
-public class ColorTrackerMesh : ColorTracker
+namespace Assets.Scripts.ColorSystem.ColorTracker
 {
-    private MeshRenderer _meshRenderer;
-
-    public override void Initialize()
+    [RequireComponent(typeof(MeshRenderer))]
+    public class ColorTrackerMesh : ColorTracker
     {
-        base.Initialize();
-    }
+        private MeshRenderer _meshRenderer;
 
-    protected override void SetTracker()
-    {
-        _meshRenderer = GetComponent<MeshRenderer>();
-        Material material = _meshRenderer.material;
-        ColorData.ColorChanged += (color) => SetMaterialColor(material, color);
-    }
+        public override void Initialize()
+        {
+            base.Initialize();
+        }
 
-    private void SetMaterialColor(Material material, Color color)
-    {
-        material.SetColor("_Color", color);
+        protected override void SetTracker()
+        {
+            _meshRenderer = GetComponent<MeshRenderer>();
+            Material material = _meshRenderer.material;
+            ColorData.ColorChanged += (color) => SetMaterialColor(material, color);
+        }
+
+        private void SetMaterialColor(Material material, Color color)
+        {
+            material.SetColor("_Color", color);
+        }
     }
 }

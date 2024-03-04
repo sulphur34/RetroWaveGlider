@@ -1,9 +1,12 @@
 using System;
 using UnityEngine;
 
-public interface IColorData
+namespace Assets.Scripts.ColorSystem
 {
-    public Color Color { get; }
+    public interface IColorData
+    {
+        public Color Color { get; }
 
-    public event Action<Color> ColorChanged;
+        public event Action<Color> ColorChanged;
+    }
 }

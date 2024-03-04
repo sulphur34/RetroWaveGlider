@@ -2,107 +2,116 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorHandler : MonoBehaviour
+namespace Assets.Scripts.ColorSystem
 {
-    [SerializeField] private ColorSheme[] _colorSchemes;
-
-    private Dictionary<string, ColorData> _colorsData;
-    private Coroutine _coroutine;
-    private int _schemeIndex;
-    private int _nextSchemeIndex;
-
-    public IColorData GetColorData(string name)
+    public class ColorHandler : MonoBehaviour
     {
-        return _colorsData[name];
-    }
+        [SerializeField] private ColorSheme[] _colorSchemes;
+        [SerializeField] private float _hueChangeStep = 0.1f;
+        [SerializeField] private float _hueChangeDelay = 0.001f;
+        [SerializeField] private float _colorTransitStep = 0.01f;
+        [SerializeField] private float _colorTransitDelay = 0.1f;
 
-    public void Initialize(int schemeIndex)
-    {
-        SetIndex(schemeIndex);
-        _colorsData = new Dictionary<string, ColorData>();
+        private Dictionary<string, ColorData> _colorsData;
+        private Coroutine _coroutine;
+        private int _schemeIndex;
+        private int _nextSchemeIndex;
+        private WaitForSeconds _hueDelay;
+        private WaitForSeconds _transitDelay;
 
-        foreach (ColorSheme colorScheme in _colorSchemes)
-            colorScheme.Initialize();
-
-        foreach (var keyValuePair in _colorSchemes[schemeIndex].Colors)
+        public IColorData GetColorData(string name)
         {
-            ColorData colorData = new ColorData(keyValuePair.Value);
-            _colorsData.Add(keyValuePair.Key, colorData);
+            return _colorsData[name];
         }
 
-        LoopHue();
-    }
-
-    private void LoopHue()
-    {
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
-
-        _coroutine = StartCoroutine(AnimateHue());
-    }
-
-    private IEnumerator AnimateHue()
-    {
-        float hueAdditionValue = 0;
-        float hueMaxValue = 1;
-        float step = 0.1f;
-
-        while (hueAdditionValue < hueMaxValue)
+        public void Initialize(int schemeIndex)
         {
-            hueAdditionValue += step * Time.deltaTime;
+            _hueDelay = new WaitForSeconds(_hueChangeDelay);
+            _transitDelay = new WaitForSeconds(_colorTransitDelay);
+            SetIndex(schemeIndex);
+            _colorsData = new Dictionary<string, ColorData>();
 
-            foreach (ColorData colorData in _colorsData.Values)
+            foreach (ColorSheme colorScheme in _colorSchemes)
+                colorScheme.Initialize();
+
+            foreach (var keyValuePair in _colorSchemes[schemeIndex].Colors)
             {
-                colorData.AddHue(hueAdditionValue);
+                ColorData colorData = new ColorData(keyValuePair.Value);
+                _colorsData.Add(keyValuePair.Key, colorData);
             }
 
-            yield return new WaitForSeconds(0.01f);
+            LoopHue();
         }
 
-        Transit();
-    }
-
-    private void Transit()
-    {
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
-
-        _coroutine = StartCoroutine(AnimateTransition());
-    }
-
-    private IEnumerator AnimateTransition()
-    {
-        float interpolationValue = 0;
-        float maxInterpolationValue = 1;
-        float step = 0.1f;
-
-        while (interpolationValue < maxInterpolationValue)
+        private void LoopHue()
         {
-            interpolationValue += step;
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
 
-            foreach (string key in _colorsData.Keys)
+            _coroutine = StartCoroutine(AnimateHue());
+        }
+
+        private IEnumerator AnimateHue()
+        {
+            float hueAdditionValue = 0;
+            float hueMaxValue = 1;
+
+            while (hueAdditionValue < hueMaxValue)
             {
-                ColorData colorData = _colorsData[key];
-                Color targetColor = _colorSchemes[_nextSchemeIndex].Colors[key];
-                colorData.InterpolateColor(targetColor, interpolationValue);
+                hueAdditionValue += _hueChangeStep * Time.deltaTime;
+
+                foreach (ColorData colorData in _colorsData.Values)
+                {
+                    colorData.AddHue(hueAdditionValue);
+                }
+
+                yield return _hueDelay;
             }
 
-            yield return new WaitForSeconds(0.1f);
+            Transit();
         }
 
-        IncreaseIndex();
-        LoopHue();
-    }
+        private void Transit()
+        {
+            if (_coroutine != null)
+                StopCoroutine(_coroutine);
 
-    private void SetIndex(int index)
-    {
-        _schemeIndex = index;
-        _nextSchemeIndex = _nextSchemeIndex < _colorSchemes.Length - 1 ? index += 1 : 0;
-    }
+            _coroutine = StartCoroutine(AnimateTransition());
+        }
 
-    private void IncreaseIndex()
-    {
-        int index = _schemeIndex < _colorSchemes.Length - 1 ? _schemeIndex += 1 : 0;
-        SetIndex(index);
+        private IEnumerator AnimateTransition()
+        {
+            float interpolationValue = 0;
+            float maxInterpolationValue = 1;
+
+            while (interpolationValue < maxInterpolationValue)
+            {
+                interpolationValue += _colorTransitStep;
+
+                foreach (string key in _colorsData.Keys)
+                {
+                    ColorData colorData = _colorsData[key];
+                    Color targetColor = _colorSchemes[_nextSchemeIndex].Colors[key];
+                    colorData.InterpolateColor(targetColor, interpolationValue);
+                }
+
+                yield return _transitDelay;
+            }
+
+            IncreaseIndex();
+            LoopHue();
+        }
+
+        private void SetIndex(int index)
+        {
+            _schemeIndex = index;
+            _nextSchemeIndex = _nextSchemeIndex < _colorSchemes.Length - 1 ? index += 1 : 0;
+        }
+
+        private void IncreaseIndex()
+        {
+            int index = _schemeIndex < _colorSchemes.Length - 1 ? _schemeIndex += 1 : 0;
+            SetIndex(index);
+        }
     }
 }

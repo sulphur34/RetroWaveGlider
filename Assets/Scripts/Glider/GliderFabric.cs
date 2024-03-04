@@ -1,21 +1,24 @@
-using Unity.VisualScripting;
+using Assets.Scripts.ColorSystem;
 using UnityEngine;
 
-public class GliderFabric : MonoBehaviour
+namespace Assets.Scripts.Glider
 {
-    [SerializeField] Glider _glider;
-
-    ColorHandler _colorHandler;
-
-    public void Initialize(ColorHandler colorHandler)
+    public class GliderFabric : MonoBehaviour
     {
-        _colorHandler = colorHandler;
-    }
+        [SerializeField] private Glider _glider;
 
-    //public Glider Build()
-    //{
-    //    Glider newGlider = Instantiate(_gliderPrefabs[0]);
-    //    newGlider.Initialize();
-    //    return newGlider;
-    //}
+        private ColorHandler _colorHandler;
+
+        public void Initialize(ColorHandler colorHandler)
+        {
+            _colorHandler = colorHandler;
+        }
+
+        //public Glider Build()
+        //{
+        //    Glider newGlider = Instantiate(_gliderPrefabs[0]);
+        //    newGlider.Initialize();
+        //    return newGlider;
+        //}
+    }
 }

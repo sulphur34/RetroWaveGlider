@@ -1,9 +1,12 @@
-public class BackgroundColorTracker : ColorTrackerUI
+namespace Assets.Scripts.ColorSystem.ColorTracker
 {
-    public override void Initialize()
+    public class BackgroundColorTracker : ColorTrackerUI
     {
-        ColorName = ColorNames.Background;
-        base.Initialize();
-        SetTracker();
+        public override void Initialize()
+        {
+            ColorName = ColorNames.Background;
+            base.Initialize();
+            SetTracker();
+        }
     }
 }
