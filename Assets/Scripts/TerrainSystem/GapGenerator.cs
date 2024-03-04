@@ -4,17 +4,18 @@ namespace Assets.Scripts.TerrainSystem
 {
     public class GapGenerator
     {
+        private readonly float _minHeight = 3;
+        private readonly float _offsetMaxStep = 1;
         private float _screenHeight;
-        private float _screenBorderWith;
+        private float _screenBorderWidth;
         private float _maxHeight;
-        private float _minHeight;
+        private GapData _lastGapData;
 
         public GapGenerator(float screenHeight)
         {
             _screenHeight = screenHeight;
-            _screenBorderWith = _screenHeight * 0.9f;
-            _maxHeight = _screenBorderWith;
-            _minHeight = 7;
+            _screenBorderWidth = _screenHeight * 0.9f;
+            _maxHeight = _screenBorderWidth;
         }
 
         public GapData GetGapData(float _difficultyFactor)
@@ -22,15 +23,16 @@ namespace Assets.Scripts.TerrainSystem
             float height = GetRandomHeight(_difficultyFactor);
             float offset = GetRandomOffset(height);
             float upperMinLimit = offset + height / 2;
-            float upperMaxLimit = _screenBorderWith / 2;
-            float lowerMinLimit = -_screenBorderWith / 2;
+            float upperMaxLimit = upperMinLimit + 0.5f;
             float lowerMaxLimit = offset - height / 2;
-            return new GapData(upperMinLimit, upperMaxLimit, lowerMinLimit, lowerMaxLimit);
+            float lowerMinLimit = lowerMaxLimit - 0.5f;
+            _lastGapData = new GapData(upperMinLimit, upperMaxLimit, lowerMinLimit, lowerMaxLimit);
+            return _lastGapData;
         }
 
         private float GetRandomHeight(float difficultyFactor)
         {
-            float maxValue = (_maxHeight - 1) / difficultyFactor;
+            float maxValue = Mathf.Clamp((_maxHeight - 1) / difficultyFactor, _minHeight, _screenBorderWidth);
             return maxValue;
         }
 
@@ -38,7 +40,8 @@ namespace Assets.Scripts.TerrainSystem
         {
             float maxOffset = _maxHeight / 2 - height / 2;
             float minOffset = -maxOffset;
-            return Random.Range(minOffset, maxOffset);
+            float offset = Mathf.Clamp(Random.Range(-_offsetMaxStep, _offsetMaxStep), minOffset, maxOffset);
+            return offset;
         }
     }
 }

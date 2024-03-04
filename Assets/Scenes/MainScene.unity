@@ -633,7 +633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &328949085
 Transform:
   m_ObjectHideFlags: 0
@@ -16344,7 +16344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1365320791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21626,8 +21626,8 @@ MonoBehaviour:
   _terrainMeshLow: {fileID: 2111715434}
   _cameraData: {fileID: 519420034}
   _prewarmValue: 100
-  _xTerrainDelta: 1
-  _yTerrainDelta: 1
+  _xTerrainDelta: 0.25
+  _yTerrainDelta: 0.25
   _switchDelay: 4
 --- !u!1 &1594895237
 GameObject:
@@ -22098,7 +22098,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1697078753
 Transform:
   m_ObjectHideFlags: 0
@@ -22556,7 +22556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1886148685
 Transform:
   m_ObjectHideFlags: 0
