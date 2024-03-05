@@ -1,13 +1,14 @@
 using System.Collections;
-using Assets.Scripts.TerrainSystem;
-using Assets.Scripts.Utils;
+using TerrainSystem;
 using UnityEngine;
+using Utils;
 
-namespace Assets.Scripts.CollectiblesSystem
+namespace CollectiblesSystem
 {
     public class CollectibleSpawner : MonoBehaviour, ISpawner
     {
         [SerializeField] private Collectible _collectiblePrefab;
+        [SerializeField] private Transform _container;
         [SerializeField] private CaveBuilder _caveBuilder;
         [SerializeField] private int _startAmount = 5;
         [SerializeField] private float _spawnDelay = 5;
@@ -19,7 +20,7 @@ namespace Assets.Scripts.CollectiblesSystem
         public void Initialize()
         {
             _objectPool = new ObjectPool<Collectible>();
-            _objectPool.Initialize(_collectiblePrefab, _startAmount);
+            _objectPool.Initialize(_collectiblePrefab, _container, _startAmount);
             _waitForSeconds = new WaitForSeconds(_spawnDelay);
             Activate();
         }

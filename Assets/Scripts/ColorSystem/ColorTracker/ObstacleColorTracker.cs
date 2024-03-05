@@ -1,4 +1,4 @@
-namespace Assets.Scripts.ColorSystem.ColorTracker
+namespace ColorSystem.ColorTracker
 {
     public class ObstacleColorTracker : ColorTrackerMesh
     {

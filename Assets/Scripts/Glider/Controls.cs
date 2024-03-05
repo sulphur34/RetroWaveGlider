@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Glider
+namespace Glider
 {
     [RequireComponent(typeof(Mover))]
     public class Controls : MonoBehaviour

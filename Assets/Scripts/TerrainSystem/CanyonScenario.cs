@@ -1,26 +1,28 @@
-using Assets.Scripts.TerrainSystem;
 using UnityEngine;
 
-public class CanyonScenario : Scenario
+namespace TerrainSystem
 {
-    private int _patternRepeatValue = 0;
-    private int _offsetValue = 0;
-    protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
+    public class CanyonScenario : Scenario
     {
-        Vector3 lastVertex = terrainMesh.LastVertex;
-
-        if (_patternRepeatValue <= 0)
+        private int _patternRepeatValue = 0;
+        private int _offsetValue = 0;
+        protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
         {
-            _offsetValue = Random.Range(-1, 2);
-            _patternRepeatValue = Random.Range(1, 5);
-        }
+            Vector3 lastVertex = terrainMesh.LastVertex;
 
-        _patternRepeatValue--;
-        float newXPosition = lastVertex.x + terrainMesh.XDelta;
-        float newYPosition = lastVertex.y + terrainMesh.XDelta * _offsetValue;
-        newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
-        Vector3 vertex1 = new Vector3(newXPosition, terrainMesh.YStart);
-        Vector3 vertex2 = new Vector3(newXPosition, newYPosition);
-        terrainMesh.MoveMesh(vertex1, vertex2);
+            if (_patternRepeatValue <= 0)
+            {
+                _offsetValue = Random.Range(-1, 2);
+                _patternRepeatValue = Random.Range(1, 5);
+            }
+
+            _patternRepeatValue--;
+            float newXPosition = lastVertex.x + terrainMesh.XDelta;
+            float newYPosition = lastVertex.y + terrainMesh.XDelta * _offsetValue;
+            newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
+            Vector3 vertex1 = new Vector3(newXPosition, terrainMesh.YStart);
+            Vector3 vertex2 = new Vector3(newXPosition, newYPosition);
+            terrainMesh.MoveMesh(vertex1, vertex2);
+        }
     }
 }

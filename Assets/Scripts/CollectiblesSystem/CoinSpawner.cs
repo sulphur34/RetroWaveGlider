@@ -1,9 +1,12 @@
-using Assets.Scripts.Utils;
+using Utils;
 
-public class CoinSpawner : Spawner
+namespace CollectiblesSystem
 {
-    public override void Spawn()
+    public class CoinSpawner : Spawner
     {
-        throw new System.NotImplementedException();
+        public override void Spawn()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

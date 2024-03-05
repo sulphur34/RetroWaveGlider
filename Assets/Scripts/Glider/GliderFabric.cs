@@ -1,7 +1,7 @@
-using Assets.Scripts.ColorSystem;
+using ColorSystem;
 using UnityEngine;
 
-namespace Assets.Scripts.Glider
+namespace Glider
 {
     public class GliderFabric : MonoBehaviour
     {

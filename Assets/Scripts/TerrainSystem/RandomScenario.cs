@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.TerrainSystem
+namespace TerrainSystem
 {
     public class RandomScenario : Scenario
     {

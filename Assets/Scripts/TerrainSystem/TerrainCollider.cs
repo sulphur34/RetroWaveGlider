@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.TerrainSystem
+namespace TerrainSystem
 {
     [RequireComponent(typeof(EdgeCollider2D))]
     [RequireComponent(typeof(TerrainMesh))]

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.TerrainSystem
+namespace TerrainSystem
 {
     public class ScenarioHandler : MonoBehaviour
     {

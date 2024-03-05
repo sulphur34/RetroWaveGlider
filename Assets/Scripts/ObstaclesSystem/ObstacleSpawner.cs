@@ -1,11 +1,12 @@
-using Assets.Scripts.Utils;
 using UnityEngine;
+using Utils;
 
-namespace Assets.Scripts.ObstaclesSystem
+namespace ObstaclesSystem
 {
     public class ObstacleSpawner : MonoBehaviour
     {
         [SerializeField] private Obstacle _obstaclePrefab;
+        [SerializeField] private Transform _container;
 
         private ObjectPool<Obstacle> _objectPool;
         private CameraData _cameraData;
@@ -24,7 +25,7 @@ namespace Assets.Scripts.ObstaclesSystem
         {
             _objectPool = new ObjectPool<Obstacle>();
             _cameraData = cameraData;
-            _objectPool.Initialize(_obstaclePrefab, 200);
+            _objectPool.Initialize(_obstaclePrefab, _container, 200);
             _lastCameraPosition = _cameraData.RightBorder;
         }
 

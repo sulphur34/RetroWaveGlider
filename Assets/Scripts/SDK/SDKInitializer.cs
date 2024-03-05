@@ -3,7 +3,7 @@ using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.SDK
+namespace SDK
 {
     public sealed class SDKInitializer : MonoBehaviour
     {

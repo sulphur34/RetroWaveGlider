@@ -1,12 +1,13 @@
-using Assets.Scripts.CollectiblesSystem;
-using Assets.Scripts.Glider;
 using UnityEngine;
 
-public class EnergyCell : Collectible
+namespace CollectiblesSystem
 {
-    [SerializeField] private ParticleSystem _onCollectParticlePrefab;
-    protected override void OnCollision(Glider glider)
+    public class EnergyCell : Collectible
     {
-        Destroy(gameObject);
+        [SerializeField] private ParticleSystem _onCollectParticlePrefab;
+        protected override void OnCollision(Glider.Glider glider)
+        {
+            Destroy(gameObject);
+        }
     }
 }

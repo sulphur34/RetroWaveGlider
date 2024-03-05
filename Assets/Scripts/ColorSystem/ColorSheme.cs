@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.ColorSystem
+namespace ColorSystem
 {
     [CreateAssetMenu(menuName = "Color Scheme", fileName = "Color Scheme", order = 53)]
     public class ColorSheme : ScriptableObject

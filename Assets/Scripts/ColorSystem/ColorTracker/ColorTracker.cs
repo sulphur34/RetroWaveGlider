@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.ColorSystem.ColorTracker
+namespace ColorSystem.ColorTracker
 {
     public abstract class ColorTracker : MonoBehaviour
     {

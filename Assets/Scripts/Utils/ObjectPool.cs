@@ -2,15 +2,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripts.Utils
+namespace Utils
 {
     public class ObjectPool<T> where T : MonoBehaviour
     {
         private T _prefab;
         private List<T> _objects;
+        private Transform _container;
 
-        public void Initialize(T prefab, int startSize)
+        public void Initialize(T prefab, Transform container, int startSize)
         {
+            _container = container;
             _prefab = prefab;
             _objects = new List<T>();
 
@@ -41,7 +43,7 @@ namespace Assets.Scripts.Utils
 
         private void Create(out T newInstance)
         {
-            var instance = Object.Instantiate(_prefab);
+            var instance = Object.Instantiate(_prefab, _container);
             instance.gameObject.SetActive(false);
             _objects.Add(instance);
             newInstance = instance;

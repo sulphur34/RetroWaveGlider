@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Glider
+namespace Glider
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class Mover : MonoBehaviour

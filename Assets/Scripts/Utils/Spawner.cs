@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Utils
+namespace Utils
 {
     public abstract class Spawner : ObjectPool<MonoBehaviour>, ISpawner
     {

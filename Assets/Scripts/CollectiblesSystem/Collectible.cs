@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.CollectiblesSystem
+namespace CollectiblesSystem
 {
     public abstract class Collectible : MonoBehaviour
     {

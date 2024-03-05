@@ -1,7 +1,7 @@
-using Assets.Scripts.ColorSystem.ColorTracker;
+using ColorSystem.ColorTracker;
 using UnityEngine;
 
-namespace Assets.Scripts.Glider
+namespace Glider
 {
     [RequireComponent(typeof(Mover))]
     [RequireComponent(typeof(Controls))]

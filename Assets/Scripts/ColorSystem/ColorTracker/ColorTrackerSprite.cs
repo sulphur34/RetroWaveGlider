@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.ColorSystem.ColorTracker
+namespace ColorSystem.ColorTracker
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class ColorTrackerSprite : ColorTracker

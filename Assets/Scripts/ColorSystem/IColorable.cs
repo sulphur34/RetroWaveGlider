@@ -1,4 +1,4 @@
-namespace Assets.Scripts.ColorSystem
+namespace ColorSystem
 {
     public interface IColorable
     {

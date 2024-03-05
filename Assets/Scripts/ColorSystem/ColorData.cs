@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.ColorSystem
+namespace ColorSystem
 {
     public class ColorData : IColorData
     {

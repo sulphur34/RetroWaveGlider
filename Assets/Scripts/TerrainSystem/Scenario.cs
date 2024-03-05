@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.TerrainSystem
+namespace TerrainSystem
 {
     public abstract class Scenario : MonoBehaviour
     {
@@ -21,7 +21,7 @@ namespace Assets.Scripts.TerrainSystem
         {
             _lowerLimit = lowerLimit;
             _upperLimit = upperLimit;
-            _coroutine = StartCoroutine(Generate());
+            _coroutine = StartCoroutine(GeneratingTerrain());
         }
 
         public void Deactivate()
@@ -32,7 +32,7 @@ namespace Assets.Scripts.TerrainSystem
             }
         }
 
-        protected virtual IEnumerator Generate()
+        protected virtual IEnumerator GeneratingTerrain()
         {
             bool isContinue = true;
 

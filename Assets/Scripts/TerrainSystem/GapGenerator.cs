@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.TerrainSystem
+namespace TerrainSystem
 {
     public class GapGenerator
     {
@@ -23,9 +23,9 @@ namespace Assets.Scripts.TerrainSystem
             float height = GetRandomHeight(_difficultyFactor);
             float offset = GetRandomOffset(height);
             float upperMinLimit = offset + height / 2;
-            float upperMaxLimit = upperMinLimit + 0.5f;
+            float upperMaxLimit = upperMinLimit + 1f;
             float lowerMaxLimit = offset - height / 2;
-            float lowerMinLimit = lowerMaxLimit - 0.5f;
+            float lowerMinLimit = lowerMaxLimit - 1f;
             _lastGapData = new GapData(upperMinLimit, upperMaxLimit, lowerMinLimit, lowerMaxLimit);
             return _lastGapData;
         }

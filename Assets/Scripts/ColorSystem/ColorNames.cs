@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Assets.Scripts.ColorSystem
+namespace ColorSystem
 {
     public class ColorNames
     {

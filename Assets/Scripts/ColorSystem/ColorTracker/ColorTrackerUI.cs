@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.ColorSystem.ColorTracker
+namespace ColorSystem.ColorTracker
 {
     [RequireComponent(typeof(Image))]
     public class ColorTrackerUI : ColorTracker

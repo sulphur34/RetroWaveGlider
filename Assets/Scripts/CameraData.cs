@@ -1,41 +1,43 @@
 using UnityEngine;
 
-namespace Assets.Scripts
+public class CameraData : MonoBehaviour
 {
-    public class CameraData : MonoBehaviour
+    private Camera _camera;
+    private Transform _transform;
+    private Vector2 _startPosition;
+
+    public float UpperBorder { get; private set; }
+    public float LowerBorder { get; private set; }
+    public float LeftBorder { get; private set; }
+    public float RightBorder { get; private set; }
+    public float Height { get; private set; }
+    public float Width { get; private set; }
+    public Vector2 CameraPosition => _transform.position;
+    public float MoveDistance => Vector2.Distance(_startPosition, CameraPosition);
+
+    private void Update()
     {
-        private Camera _camera;
+        SetBorders();
+    }
 
-        public float UpperBorder { get; private set; }
-        public float LowerBorder { get; private set; }
-        public float LeftBorder { get; private set; }
-        public float RightBorder { get; private set; }
-        public float Height { get; private set; }
-        public float Width { get; private set; }
-        public Vector2 CameraPosition { get; private set; }
+    public void Initialize()
+    {
+        _transform = _camera.transform;
+        _startPosition = _transform.position;
+        _camera = Camera.main;
+        SetBorders();
+    }
 
-        private void Update()
-        {
-            SetBorders();
-        }
+    private void SetBorders()
+    {
+        Height = 2f * _camera.orthographicSize;
+        Width = Height * _camera.aspect;
 
-        public void Initialize()
-        {
-            _camera = Camera.main;
-            SetBorders();
-        }
+        Vector2 cameraPosition = CameraPosition;
 
-        private void SetBorders()
-        {
-            Height = 2f * _camera.orthographicSize;
-            Width = Height * _camera.aspect;
-
-            CameraPosition = _camera.transform.position;
-
-            LeftBorder = CameraPosition.x - Width / 2f;
-            RightBorder = CameraPosition.x + Width / 2f;
-            UpperBorder = CameraPosition.y + Height / 2f;
-            LowerBorder = CameraPosition.y - Height / 2f;
-        }
+        LeftBorder = cameraPosition.x - Width / 2f;
+        RightBorder = cameraPosition.x + Width / 2f;
+        UpperBorder = cameraPosition.y + Height / 2f;
+        LowerBorder = cameraPosition.y - Height / 2f;
     }
 }

@@ -1,12 +1,12 @@
-using Assets.Scripts.ColorSystem;
-using Assets.Scripts.ColorSystem.ColorTracker;
-
-public class BackgroundCaveColorTracker : ColorTrackerMesh
+namespace ColorSystem.ColorTracker
 {
-    public override void Initialize()
+    public class BackgroundCaveColorTracker : ColorTrackerMesh
     {
-        ColorName = ColorNames.MovableBackground;
-        base.Initialize();
-        SetTracker();
+        public override void Initialize()
+        {
+            ColorName = ColorNames.MovableBackground;
+            base.Initialize();
+            SetTracker();
+        }
     }
 }

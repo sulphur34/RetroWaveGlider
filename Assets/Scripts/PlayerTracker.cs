@@ -1,15 +1,13 @@
 using UnityEngine;
 
-namespace Assets.Scripts
+public class PlayerTracker : MonoBehaviour
 {
-    public class PlayerTracker : MonoBehaviour
-    {
-        [SerializeField] private float _offsetsX;
-        [SerializeField] private Glider.Glider _glider;
+    [SerializeField] private float _offsetsX;
+    [SerializeField] private Glider.Glider _glider;
 
-        private void Update()
-        {
-            transform.position = new Vector3(_glider.transform.position.x - _offsetsX, transform.position.y, transform.position.z);
-        }
+    private void Update()
+    {
+        Vector3 position = transform.position;
+        transform.Translate(new Vector3(_glider.transform.position.x - _offsetsX, position.y, position.z));
     }
 }
