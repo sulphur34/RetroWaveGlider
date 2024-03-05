@@ -5,7 +5,7 @@ namespace TerrainSystem
     public class GapGenerator
     {
         private readonly float _minHeight = 3;
-        private readonly float _offsetMaxStep = 1;
+        private readonly float _offsetMaxStep = 2;
         private float _screenHeight;
         private float _screenBorderWidth;
         private float _maxHeight;
@@ -22,6 +22,7 @@ namespace TerrainSystem
         {
             float height = GetRandomHeight(_difficultyFactor);
             float offset = GetRandomOffset(height);
+            Debug.Log(height + " - " + offset);
             float upperMinLimit = offset + height / 2;
             float upperMaxLimit = upperMinLimit + 1f;
             float lowerMaxLimit = offset - height / 2;

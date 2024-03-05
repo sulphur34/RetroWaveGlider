@@ -22,10 +22,13 @@ public class CameraData : MonoBehaviour
 
     public void Initialize()
     {
-        _transform = _camera.transform;
-        _startPosition = _transform.position;
         _camera = Camera.main;
-        SetBorders();
+        if (_camera != null)
+        {
+            _transform = _camera.transform;
+            _startPosition = _transform.position;
+            SetBorders();
+        }
     }
 
     private void SetBorders()

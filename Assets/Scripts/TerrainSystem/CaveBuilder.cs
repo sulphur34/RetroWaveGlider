@@ -29,8 +29,7 @@ namespace TerrainSystem
 
             if (_switchDelay <= _timePassed)
             {
-                _difficultyFactor += 0.1f;
-                GapData gapData = _gapGenerator.GetGapData(_difficultyFactor);
+                GapData gapData = _gapGenerator.GetGapData(3);
                 _lowScenarioHandler.Refresh(gapData.LowerMaxLimit, gapData.LowerMinLimit);
                 _upperScenarioHandler.Refresh(gapData.UpperMaxLimit, gapData.UpperMinLimit);
                 _timePassed = 0;
