@@ -32,6 +32,7 @@ namespace Glider
 
         private void FixedUpdate()
         {
+            AddHorizontalVelocity();
             _rigidbody.MoveRotation(Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime));
         }
 

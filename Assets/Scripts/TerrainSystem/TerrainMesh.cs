@@ -34,7 +34,6 @@ namespace TerrainSystem
             _meshFilter = GetComponent<MeshFilter>();
             _meshRenderer = GetComponent<MeshRenderer>();
             _mesh = new Mesh();
-            _meshRenderer.material.SetColor("Terrain", Color.black);
             CreateQuads();
         }
 
@@ -47,13 +46,13 @@ namespace TerrainSystem
             });
         }
 
-        public void AddEdge(Vector3 vertex1, Vector3 vertex2, List<Vector3> vertices)
+        private void AddEdge(Vector3 vertex1, Vector3 vertex2, List<Vector3> vertices)
         {
             AddToList(vertices, vertex1, vertex2);
             _xSize++;
         }
 
-        public void RemoveEdge(List<Vector3> vertices)
+        private void RemoveEdge(List<Vector3> vertices)
         {
             RemoveFromList(vertices);
             XStart += XDelta;

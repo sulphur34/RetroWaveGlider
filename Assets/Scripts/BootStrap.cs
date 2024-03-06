@@ -20,9 +20,9 @@ public class BootStrap : MonoBehaviour
 
         foreach (ColorTracker tracker in _colorTrackers)
             tracker.Initialize();
-
-        _caveBuilder.Initialize();
-        _backgroundCaveBuilder.Initialize();
+        
+        _caveBuilder.Initialize<StalagmiteScenario>();
+        _backgroundCaveBuilder.Initialize<StalagmiteScenario>();
         _collectibleSpawner.Initialize();
     }
 }

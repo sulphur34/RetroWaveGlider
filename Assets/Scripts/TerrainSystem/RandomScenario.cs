@@ -4,7 +4,7 @@ namespace TerrainSystem
 {
     public class RandomScenario : Scenario
     {
-        protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
+        public override void GenerateTerrain(TerrainMesh terrainMesh,float minConstrain, float maxConstrain)
         {
             Vector3 lastVertex = terrainMesh.LastVertex;
             float offsetValue = Random.Range(0.1f, 0.5f);

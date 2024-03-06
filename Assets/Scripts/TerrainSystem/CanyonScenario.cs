@@ -4,9 +4,10 @@ namespace TerrainSystem
 {
     public class CanyonScenario : Scenario
     {
-        private int _patternRepeatValue = 0;
         private int _offsetValue = 0;
-        protected override void GenerateTerrain(TerrainMesh terrainMesh, float minConstrain, float maxConstrain)
+        private int _patternRepeatValue = 0;
+
+        public override void GenerateTerrain(TerrainMesh terrainMesh,float minConstrain, float maxConstrain)
         {
             Vector3 lastVertex = terrainMesh.LastVertex;
 
