@@ -16,7 +16,7 @@ namespace ColorSystem.ColorTracker
         protected override void SetTracker()
         {
             _image = GetComponent<Image>();
-            ColorData.ColorChanged += (color) => _image.color = color;
+            ColorData.ColorChanged += (color) => _image.color = AdjustColor(color);
         }
     }
 }

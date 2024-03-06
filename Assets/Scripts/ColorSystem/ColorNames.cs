@@ -8,12 +8,11 @@ namespace ColorSystem
         public const string EnemyOne = "EnemyOne";
         public const string EnemyTwo = "EnemyTwo";
         public const string Background = "Background";
-        public const string MovableBackground = "MovableBackground";
         public const string Obstacle = "Obstacle";
 
         private static readonly List<string> _names = new List<string>()
         {
-            Glider, EnemyOne, EnemyTwo, Background, MovableBackground, Obstacle
+            Glider, EnemyOne, EnemyTwo, Background, Obstacle
         };
 
         public static IReadOnlyList<string> Names => _names;

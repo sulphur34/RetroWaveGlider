@@ -9,8 +9,7 @@ public class BootStrap : MonoBehaviour
     [SerializeField] private ColorHandler _colorHandler;
     [SerializeField] private CameraData _cameraData;
     [SerializeField] private ColorTracker[] _colorTrackers;
-    [SerializeField] private CaveBuilder _caveBuilder;
-    [SerializeField] private CaveBuilder _backgroundCaveBuilder;
+    [SerializeField] private CaveBuilder[] _caveBuilders;
     [SerializeField] private CollectibleSpawner _collectibleSpawner;
 
     private void Awake()
@@ -21,8 +20,9 @@ public class BootStrap : MonoBehaviour
         foreach (ColorTracker tracker in _colorTrackers)
             tracker.Initialize();
         
-        _caveBuilder.Initialize<StalagmiteScenario>();
-        _backgroundCaveBuilder.Initialize<StalagmiteScenario>();
+        foreach (CaveBuilder caveBuilder in _caveBuilders)
+            caveBuilder.Initialize<RandomPattern>();
+        
         _collectibleSpawner.Initialize();
     }
 }

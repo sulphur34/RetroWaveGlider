@@ -2,24 +2,14 @@ using UnityEngine;
 
 namespace TerrainSystem
 {
-    public class CanyonScenario : Scenario
+    public class RandomPattern : Pattern
     {
-        private int _offsetValue = 0;
-        private int _patternRepeatValue = 0;
-
         public override void GenerateTerrain(TerrainMesh terrainMesh,float minConstrain, float maxConstrain)
         {
             Vector3 lastVertex = terrainMesh.LastVertex;
-
-            if (_patternRepeatValue <= 0)
-            {
-                _offsetValue = Random.Range(-1, 2);
-                _patternRepeatValue = Random.Range(1, 5);
-            }
-
-            _patternRepeatValue--;
+            float offsetValue = Random.Range(0.1f, 0.5f);
             float newXPosition = lastVertex.x + terrainMesh.XDelta;
-            float newYPosition = lastVertex.y + terrainMesh.XDelta * _offsetValue;
+            float newYPosition = lastVertex.y + Random.Range(-offsetValue, offsetValue);
             newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
             Vector3 vertex1 = new Vector3(newXPosition, terrainMesh.YStart);
             Vector3 vertex2 = new Vector3(newXPosition, newYPosition);

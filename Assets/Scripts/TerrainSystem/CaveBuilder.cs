@@ -11,24 +11,25 @@ namespace TerrainSystem
         [SerializeField] private int _prewarmValue;
         [SerializeField] private float _xTerrainDelta = 0.25f;
         [SerializeField] private float _yTerrainDelta = 0.25f;
+        [SerializeField] private float _difficultyFactor = 1;
+        [SerializeField] private float _minGapHeight = 2;
 
         private GapGenerator _gapGenerator;
         private Coroutine _coroutine;
         private GapData _gapData;
-        private float _difficultyFactor = 1;
-        private Scenario _scenarioLow;
-        private Scenario _scenarioHigh;
+        private Pattern _patternLow;
+        private Pattern _patternHigh;
 
         public Vector2 GapPositionY => new Vector2(_terrainMeshHigh.LastVertex.y, _terrainMeshLow.LastVertex.y);
         public float XEnd => _terrainMeshLow.LastVertex.x;
 
-        public void Initialize<T>() where T : Scenario, new()
+        public void Initialize<T>() where T : Pattern, new()
         {
-            _scenarioLow = new T();
-            _scenarioHigh = new T();
+            _patternLow = new T();
+            _patternHigh = new T();
             _prewarmValue = Mathf.RoundToInt(_cameraData.Width / _xTerrainDelta) * 2;
             _gapGenerator = new GapGenerator(_cameraData.Height);
-            _gapData = _gapGenerator.GetGapData(_difficultyFactor);
+            _gapData = _gapGenerator.GetGapData(_minGapHeight, _difficultyFactor);
             SetTerrains();
             Activate();
         }
@@ -67,8 +68,11 @@ namespace TerrainSystem
             {
                 if (_cameraData.LeftBorder - 1 > _terrainMeshHigh.XStart)
                 {
-                    _scenarioHigh.GenerateTerrain(_terrainMeshHigh, _gapData.UpperMinLimit, _gapData.UpperMaxLimit);
-                    _scenarioLow.GenerateTerrain(_terrainMeshLow, _gapData.LowerMinLimit, _gapData.LowerMaxLimit);
+                    while (_cameraData.RightBorder + 2 >= _terrainMeshHigh.LastVertex.x)
+                    {
+                        _patternHigh.GenerateTerrain(_terrainMeshHigh, _gapData.UpperMinLimit, _gapData.UpperMaxLimit);
+                        _patternLow.GenerateTerrain(_terrainMeshLow, _gapData.LowerMinLimit, _gapData.LowerMaxLimit);
+                    }
                 }
 
                 yield return null;

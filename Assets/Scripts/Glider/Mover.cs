@@ -26,13 +26,13 @@ namespace Glider
             _zeroRotation = Quaternion.Euler(0, 0, 0);
             _minRotation = Quaternion.Euler(0, 0, _minRotationZ);
             _maxRotation = Quaternion.Euler(0, 0, _maxRotationZ);
+            AddVerticalVelocity();
         }
 
         private Vector2 _zeroVerticalVelocity => new Vector2(_currentSpeed, 0);
 
         private void FixedUpdate()
         {
-            AddHorizontalVelocity();
             _rigidbody.MoveRotation(Quaternion.Lerp(transform.rotation, _minRotation, _rotationSpeed * Time.deltaTime));
         }
 

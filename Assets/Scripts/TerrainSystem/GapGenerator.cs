@@ -4,36 +4,33 @@ namespace TerrainSystem
 {
     public class GapGenerator
     {
-        private readonly float _minHeight = 3;
-        private readonly float _offsetMaxStep = 2;
-        private float _screenHeight;
-        private float _screenBorderWidth;
-        private float _maxHeight;
+        private readonly float _offsetMaxStep = 1;
+        private readonly float _maxHeight;
+        
         private GapData _lastGapData;
+        private float _minHeight;
 
         public GapGenerator(float screenHeight)
         {
-            _screenHeight = screenHeight;
-            _screenBorderWidth = _screenHeight * 0.9f;
-            _maxHeight = _screenBorderWidth;
+            _maxHeight = screenHeight * 0.95f;
         }
 
-        public GapData GetGapData(float _difficultyFactor)
+        public GapData GetGapData(float minHeight, float difficultyFactor)
         {
-            float height = GetRandomHeight(_difficultyFactor);
+            _minHeight = minHeight;
+            float height = GetRandomHeight(difficultyFactor);
             float offset = GetRandomOffset(height);
-            Debug.Log(height + " - " + offset);
             float upperMinLimit = offset + height / 2;
-            float upperMaxLimit = upperMinLimit + 1f;
+            float upperMaxLimit = _maxHeight / 2;
+            float lowerMinLimit = -_maxHeight / 2;
             float lowerMaxLimit = offset - height / 2;
-            float lowerMinLimit = lowerMaxLimit - 1f;
             _lastGapData = new GapData(upperMinLimit, upperMaxLimit, lowerMinLimit, lowerMaxLimit);
             return _lastGapData;
         }
 
         private float GetRandomHeight(float difficultyFactor)
         {
-            float maxValue = Mathf.Clamp((_maxHeight - 1) / difficultyFactor, _minHeight, _screenBorderWidth);
+            float maxValue = Random.Range(_minHeight, _maxHeight / difficultyFactor);
             return maxValue;
         }
 

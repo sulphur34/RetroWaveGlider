@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace TerrainSystem
 {
-    public class StalagmiteScenario : Scenario
+    public class StalagmitePattern : Pattern
     {
         private readonly float _minOffset = 0.25f;
-        private readonly float _maxOffset = 1f;
+        private readonly float _maxOffset = 1.5f;
         private bool _isSameHeight = false;
         
         public override void GenerateTerrain(TerrainMesh terrainMesh,float minConstrain, float maxConstrain)

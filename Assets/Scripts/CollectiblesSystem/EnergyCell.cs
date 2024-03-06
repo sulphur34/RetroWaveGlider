@@ -7,7 +7,8 @@ namespace CollectiblesSystem
         [SerializeField] private ParticleSystem _onCollectParticlePrefab;
         protected override void OnCollision(Glider.Glider glider)
         {
-            Destroy(gameObject);
+            Instantiate(_onCollectParticlePrefab, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
         }
     }
 }

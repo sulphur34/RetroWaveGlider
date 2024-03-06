@@ -15,5 +15,7 @@ namespace ColorSystem.ColorTracker
         }
 
         protected abstract void SetTracker();
+
+        protected virtual Color AdjustColor(Color color) => color;
     }
 }

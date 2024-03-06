@@ -18,10 +18,10 @@ namespace ColorSystem.ColorTracker
             Material material = _meshRenderer.material;
             ColorData.ColorChanged += (color) => SetMaterialColor(material, color);
         }
-
+        
         private void SetMaterialColor(Material material, Color color)
         {
-            material.SetColor("_Color", color);
+            material.SetColor("_Color", AdjustColor(color));
         }
     }
 }

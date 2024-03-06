@@ -15,7 +15,7 @@ namespace ColorSystem.ColorTracker
         protected override void SetTracker()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            ColorData.ColorChanged += (color) => _spriteRenderer.color = color;
+            ColorData.ColorChanged += (color) => _spriteRenderer.color = AdjustColor(color);
         }
     }
 }
