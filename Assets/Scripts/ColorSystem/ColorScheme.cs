@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ColorSystem
 {
     [CreateAssetMenu(menuName = "Color Scheme", fileName = "Color Scheme", order = 53)]
-    public class ColorConfig : ScriptableObject
+    public class ColorScheme : ScriptableObject
     {
         [SerializeField] private Color[] _colors;
 

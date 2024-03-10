@@ -4,14 +4,9 @@ using UnityEngine;
 
 namespace ColorSystem
 {
-    public class ColorHandler : MonoBehaviour
+    public class ColorAnimator : MonoBehaviour
     {
-        [SerializeField] private ColorConfig[] _colorSchemes;
-        [SerializeField] private float _hueChangeStep = 0.1f;
-        [SerializeField] private float _hueChangeDelay = 0.001f;
-        [SerializeField] private float _colorTransitStep = 0.01f;
-        [SerializeField] private float _colorTransitDelay = 0.1f;
-
+        private ColorAnimatorConfig _config;
         private Dictionary<string, ColorData> _colorsData;
         private Coroutine _coroutine;
         private int _schemeIndex;
@@ -25,18 +20,19 @@ namespace ColorSystem
             return _colorsData[name];
         }
 
-        public void Initialize(int schemeIndex)
+        public void Initialize(ColorAnimatorConfig config, int schemeIndex = 0)
         {
-            _hueDelay = new WaitForSeconds(_hueChangeDelay);
-            _transitDelay = new WaitForSeconds(_colorTransitDelay);
-            _maxIndex = _colorSchemes.Length - 1;
+            _config = config;
+            _hueDelay = new WaitForSeconds(_config.HueChangeDelay);
+            _transitDelay = new WaitForSeconds(_config.ColorTransitDelay);
+            _maxIndex = _config.ColorSchemes.Length - 1;
             _schemeIndex = (schemeIndex % _maxIndex + _maxIndex) % _maxIndex;
             _colorsData = new Dictionary<string, ColorData>();
 
-            foreach (ColorConfig colorScheme in _colorSchemes)
+            foreach (ColorScheme colorScheme in _config.ColorSchemes)
                 colorScheme.Initialize();
 
-            foreach (var keyValuePair in _colorSchemes[schemeIndex].Colors)
+            foreach (var keyValuePair in _config.ColorSchemes[schemeIndex].Colors)
             {
                 ColorData colorData = new ColorData(keyValuePair.Value);
                 _colorsData.Add(keyValuePair.Key, colorData);
@@ -60,7 +56,7 @@ namespace ColorSystem
 
             while (hueAdditionValue < hueMaxValue)
             {
-                hueAdditionValue += _hueChangeStep * Time.deltaTime;
+                hueAdditionValue += _config.HueChangeStep * Time.deltaTime;
 
                 foreach (ColorData colorData in _colorsData.Values)
                 {
@@ -88,12 +84,12 @@ namespace ColorSystem
 
             while (interpolationValue < maxInterpolationValue)
             {
-                interpolationValue += _colorTransitStep;
+                interpolationValue += _config.ColorTransitStep;
 
                 foreach (string key in _colorsData.Keys)
                 {
                     ColorData colorData = _colorsData[key];
-                    Color targetColor = _colorSchemes[_nextSchemeIndex].Colors[key];
+                    Color targetColor = _config.ColorSchemes[_nextSchemeIndex].Colors[key];
                     colorData.InterpolateColor(targetColor, interpolationValue);
                 }
 

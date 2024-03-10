@@ -4,14 +4,14 @@ namespace ColorSystem.ColorTracker
 {
     public abstract class ColorTracker : MonoBehaviour
     {
-        [SerializeField] private ColorHandler colorHandler;
+        [SerializeField] private ColorAnimator colorAnimator;
 
         protected string ColorName;
         protected IColorData ColorData;
 
         public virtual void Initialize()
         {
-            ColorData = colorHandler.GetColorData(ColorName);
+            ColorData = colorAnimator.GetColorData(ColorName);
         }
 
         protected abstract void SetTracker();

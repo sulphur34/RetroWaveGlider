@@ -5,11 +5,11 @@ namespace Glider
 {
     public class GliderFactory : MonoBehaviour
     {
-        private ColorHandler _colorHandler;
+        private ColorAnimator _colorAnimator;
 
-        public void Initialize(ColorHandler colorHandler)
+        public void Initialize(ColorAnimator colorAnimator)
         {
-            _colorHandler = colorHandler;
+            _colorAnimator = colorAnimator;
         }
     }
 }

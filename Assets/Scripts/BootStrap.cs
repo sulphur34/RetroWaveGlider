@@ -6,16 +6,17 @@ using UnityEngine;
 
 public class BootStrap : MonoBehaviour
 {
-    [SerializeField] private ColorHandler _colorHandler;
+    [SerializeField] private ColorAnimator colorAnimator;
     [SerializeField] private CameraData _cameraData;
     [SerializeField] private ColorTracker[] _colorTrackers;
     [SerializeField] private CaveBuilder[] _caveBuilders;
     [SerializeField] private CollectibleSpawner _collectibleSpawner;
+    [SerializeField] private ColorAnimatorConfig _colorAnimatorConfig;
 
     private void Awake()
     {
         _cameraData.Initialize();
-        _colorHandler.Initialize(0);
+        colorAnimator.Initialize(_colorAnimatorConfig);
 
         foreach (ColorTracker tracker in _colorTrackers)
             tracker.Initialize();
