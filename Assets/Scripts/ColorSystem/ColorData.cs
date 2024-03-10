@@ -28,11 +28,11 @@ namespace ColorSystem
                 _initialColor = Color;
         }
 
-        public void AddHue(float hueChageValue)
+        public void AddHue(float hueChangeValue)
         {
             float hue, saturation, brightness;
             Color.RGBToHSV(_initialColor, out hue, out saturation, out brightness);
-            hue += hueChageValue;
+            hue += hueChangeValue;
             hue = hue > 1 ? hue - 1 : hue;
             Color = Color.HSVToRGB(hue, saturation, brightness);
             ColorChanged?.Invoke(Color);

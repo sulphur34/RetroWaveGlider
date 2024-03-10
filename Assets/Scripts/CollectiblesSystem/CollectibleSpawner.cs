@@ -1,4 +1,5 @@
 using System.Collections;
+using CollectiblesSystem.Collectibles;
 using TerrainSystem;
 using UnityEngine;
 using Utils;
@@ -54,7 +55,7 @@ namespace CollectiblesSystem
 
         private Vector3 GetPosition()
         {
-            float yPosition = (_caveBuilder.GapPositionY.x + _caveBuilder.GapPositionY.y) / 2;
+            float yPosition = Random.Range(_caveBuilder.GapPositionY.x, _caveBuilder.GapPositionY.y);
             return new Vector3(_caveBuilder.XEnd, yPosition);
         }
     }

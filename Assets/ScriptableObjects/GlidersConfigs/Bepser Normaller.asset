@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d6f24f772c641e4cb59c722753c789e, type: 3}
+  m_Name: Bepser Normaller
+  m_EditorClassIdentifier: 
+  <GliderPrefab>k__BackingField: {fileID: 0}
+  <WingTrace>k__BackingField: {fileID: 0}
+  <EngineFire>k__BackingField: {fileID: 0}
+  <ShieldPosition>k__BackingField: {x: 0, y: 0, z: 0}
+  <ShootingPoint>k__BackingField: {x: 0, y: 0, z: 0}
+  <MagnetPosition>k__BackingField: {x: 0, y: 0, z: 0}
+  <LiftForce>k__BackingField: 0
+  <AccelerationForce>k__BackingField: 0
+  <TorqueForce>k__BackingField: 0
+  <Mass>k__BackingField: 0
+  <MaxSpeed>k__BackingField: 0
+  <ModelName>k__BackingField: 
+  <CompanyName>k__BackingField: 
+  <CompanyLogo>k__BackingField: {fileID: 0}

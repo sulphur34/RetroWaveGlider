@@ -21,7 +21,7 @@ public class BootStrap : MonoBehaviour
             tracker.Initialize();
         
         foreach (CaveBuilder caveBuilder in _caveBuilders)
-            caveBuilder.Initialize<RandomPattern>();
+            caveBuilder.Initialize<CanyonPattern>();
         
         _collectibleSpawner.Initialize();
     }

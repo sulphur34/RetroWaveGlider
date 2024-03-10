@@ -6,7 +6,7 @@ namespace ColorSystem
 {
     public class ColorHandler : MonoBehaviour
     {
-        [SerializeField] private ColorSheme[] _colorSchemes;
+        [SerializeField] private ColorConfig[] _colorSchemes;
         [SerializeField] private float _hueChangeStep = 0.1f;
         [SerializeField] private float _hueChangeDelay = 0.001f;
         [SerializeField] private float _colorTransitStep = 0.01f;
@@ -15,6 +15,7 @@ namespace ColorSystem
         private Dictionary<string, ColorData> _colorsData;
         private Coroutine _coroutine;
         private int _schemeIndex;
+        private int _maxIndex;
         private int _nextSchemeIndex;
         private WaitForSeconds _hueDelay;
         private WaitForSeconds _transitDelay;
@@ -28,10 +29,11 @@ namespace ColorSystem
         {
             _hueDelay = new WaitForSeconds(_hueChangeDelay);
             _transitDelay = new WaitForSeconds(_colorTransitDelay);
-            SetIndex(schemeIndex);
+            _maxIndex = _colorSchemes.Length - 1;
+            _schemeIndex = (schemeIndex % _maxIndex + _maxIndex) % _maxIndex;
             _colorsData = new Dictionary<string, ColorData>();
 
-            foreach (ColorSheme colorScheme in _colorSchemes)
+            foreach (ColorConfig colorScheme in _colorSchemes)
                 colorScheme.Initialize();
 
             foreach (var keyValuePair in _colorSchemes[schemeIndex].Colors)
@@ -98,20 +100,8 @@ namespace ColorSystem
                 yield return _transitDelay;
             }
 
-            IncreaseIndex();
+            _schemeIndex = (++_schemeIndex % _maxIndex + _maxIndex) % _maxIndex;
             LoopHue();
-        }
-
-        private void SetIndex(int index)
-        {
-            _schemeIndex = index;
-            _nextSchemeIndex = _nextSchemeIndex < _colorSchemes.Length - 1 ? index += 1 : 0;
-        }
-
-        private void IncreaseIndex()
-        {
-            int index = _schemeIndex < _colorSchemes.Length - 1 ? _schemeIndex += 1 : 0;
-            SetIndex(index);
         }
     }
 }

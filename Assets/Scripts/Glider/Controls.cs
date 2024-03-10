@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace Glider
 {
-    [RequireComponent(typeof(Mover))]
+    [RequireComponent(typeof(GliderMover))]
     public class Controls : MonoBehaviour
     {
-        private Mover _mover;
+        private GliderMover _gliderMover;
 
         private Coroutine _coroutine;
 
@@ -27,7 +27,7 @@ namespace Glider
 
         public void Initialize()
         {
-            _mover = GetComponent<Mover>();
+            _gliderMover = GetComponent<GliderMover>();
         }
 
         private IEnumerator AwaitInput()
@@ -38,12 +38,12 @@ namespace Glider
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    _mover.AddVerticalVelocity();
+                    _gliderMover.AddVerticalVelocity();
                 }
 
                 if (Input.GetKey(KeyCode.LeftControl))
                 {
-                    _mover.AddHorizontalVelocity();
+                    _gliderMover.AddHorizontalVelocity();
                 }
 
                 yield return null;
