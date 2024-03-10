@@ -11,8 +11,9 @@ namespace Glider.ModuleSystem.Shield
 
         private Shield _shield;
 
-        private void OnEnable()
+        private void Awake()
         {
+            _shield = GetComponent<Shield>();
             _shield.Activated += OnActivation;
             _shield.Collided += OnCollision;
             _shield.Disabled += OnDisable;
@@ -35,7 +36,7 @@ namespace Glider.ModuleSystem.Shield
 
         private void ActivateParticle(ParticleSystem particleSystem)
         {
-            ActivateParticle(_timeDeactivationParticle);
+            Instantiate(particleSystem, this.transform);
         }
     }
 }
