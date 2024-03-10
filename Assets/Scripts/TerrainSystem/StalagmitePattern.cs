@@ -10,26 +10,26 @@ namespace TerrainSystem
         
         public override void GenerateTerrain(TerrainMesh terrainMesh,float minConstrain, float maxConstrain)
         {
-            Vector3 lastVertex = terrainMesh.LastVertex;
-            Vector3 vertexLow;
-            Vector3 vertexHigh;
+            Edge edge = terrainMesh.LastEdge;
+            Vector3 baseVertex;
+            Vector3 surfaceVertex;
             float offsetValue = Random.Range(_minOffset, _maxOffset);
-            float newXPosition = lastVertex.x + terrainMesh.XDelta;
+            float newXPosition = edge.SurfaceVertex.x + terrainMesh.XDelta;
 
             if (_isSameHeight)
             {
-                vertexLow = new Vector3(newXPosition, terrainMesh.YStart);
-                vertexHigh = new Vector3(newXPosition, lastVertex.y);
+                baseVertex = new Vector3(newXPosition, terrainMesh.YStart);
+                surfaceVertex = new Vector3(newXPosition, edge.SurfaceVertex.y);
             }
             else
             {
-                float newYPosition = lastVertex.y + Random.Range(-offsetValue, offsetValue);
+                float newYPosition = edge.SurfaceVertex.y + Random.Range(-offsetValue, offsetValue);
                 newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
-                vertexLow = new Vector3(newXPosition, terrainMesh.YStart);
-                vertexHigh = new Vector3(newXPosition, newYPosition);
+                baseVertex = new Vector3(newXPosition, terrainMesh.YStart);
+                surfaceVertex = new Vector3(newXPosition, newYPosition);
             }
 
-            terrainMesh.MoveMesh(vertexLow, vertexHigh);
+            terrainMesh.MoveMesh(new Edge(baseVertex, surfaceVertex));
             _isSameHeight = !_isSameHeight;
         }
     }

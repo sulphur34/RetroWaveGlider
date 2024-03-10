@@ -9,7 +9,7 @@ namespace TerrainSystem
 
         public override void GenerateTerrain(TerrainMesh terrainMesh,float minConstrain, float maxConstrain)
         {
-            Vector3 lastVertex = terrainMesh.LastVertex;
+            Edge lastEdge = terrainMesh.LastEdge;
 
             if (_patternRepeatValue <= 0)
             {
@@ -18,12 +18,12 @@ namespace TerrainSystem
             }
 
             _patternRepeatValue--;
-            float newXPosition = lastVertex.x + terrainMesh.XDelta;
-            float newYPosition = lastVertex.y + terrainMesh.XDelta * _offsetValue;
+            float newXPosition = lastEdge.SurfaceVertex.x + terrainMesh.XDelta;
+            float newYPosition = lastEdge.SurfaceVertex.y + terrainMesh.XDelta * _offsetValue;
             newYPosition = Mathf.Clamp(newYPosition, minConstrain, maxConstrain);
-            Vector3 vertex1 = new Vector3(newXPosition, terrainMesh.YStart);
-            Vector3 vertex2 = new Vector3(newXPosition, newYPosition);
-            terrainMesh.MoveMesh(vertex1, vertex2);
+            Vector3 baseVertex = new Vector3(newXPosition, terrainMesh.YStart);
+            Vector3 surfaceVertex = new Vector3(newXPosition, newYPosition);
+            terrainMesh.MoveMesh(new Edge(baseVertex, surfaceVertex));
         }
     }
 }

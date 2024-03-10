@@ -20,8 +20,8 @@ namespace TerrainSystem
         private Pattern _patternLow;
         private Pattern _patternHigh;
 
-        public Vector2 GapPositionY => new Vector2(_terrainMeshHigh.LastVertex.y, _terrainMeshLow.LastVertex.y);
-        public float XEnd => _terrainMeshLow.LastVertex.x;
+        public Vector2 GapPositionY => new Vector2(_terrainMeshHigh.LastEdge.SurfaceVertex.y, _terrainMeshLow.LastEdge.SurfaceVertex.y);
+        public float XEnd => _terrainMeshLow.LastEdge.BaseVertex.x;
 
         public void Initialize<T>() where T : Pattern, new()
         {
@@ -68,7 +68,7 @@ namespace TerrainSystem
             {
                 if (_cameraData.LeftBorder - 1 > _terrainMeshHigh.XStart)
                 {
-                    while (_cameraData.RightBorder + 2 >= _terrainMeshHigh.LastVertex.x)
+                    while (_cameraData.RightBorder + 2 >= _terrainMeshHigh.LastEdge.SurfaceVertex.x)
                     {
                         _patternHigh.GenerateTerrain(_terrainMeshHigh, _gapData.UpperMinLimit, _gapData.UpperMaxLimit);
                         _patternLow.GenerateTerrain(_terrainMeshLow, _gapData.LowerMinLimit, _gapData.LowerMaxLimit);

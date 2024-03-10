@@ -1,16 +1,16 @@
-using System.Numerics;
+using UnityEngine;
 
 namespace TerrainSystem
 {
     public class Edge
     {
-        public Edge(Vector3 vertex1, Vector3 vertex2)
+        public Edge(Vector3 baseVertex, Vector3 surfaceVertex)
         {
-            Vertex1 = vertex1;
-            Vertex2 = vertex2;
+            BaseVertex = baseVertex;
+            SurfaceVertex = surfaceVertex;
         }
 
-        public Vector3 Vertex1 { get; private set; }
-        public Vector3 Vertex2 { get; private set; }
+        public Vector3 BaseVertex { get; private set; }
+        public Vector3 SurfaceVertex { get; private set; }
     }
 }
