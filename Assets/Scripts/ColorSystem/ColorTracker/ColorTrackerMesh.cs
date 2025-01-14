@@ -7,11 +7,6 @@ namespace ColorSystem.ColorTracker
     {
         private MeshRenderer _meshRenderer;
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         protected override void SetTracker()
         {
             _meshRenderer = GetComponent<MeshRenderer>();

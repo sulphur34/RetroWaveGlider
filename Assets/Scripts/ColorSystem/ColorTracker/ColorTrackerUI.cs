@@ -8,11 +8,6 @@ namespace ColorSystem.ColorTracker
     {
         private Image _image;
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         protected override void SetTracker()
         {
             _image = GetComponent<Image>();

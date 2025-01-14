@@ -15,12 +15,6 @@ MonoBehaviour:
   <ColorSchemes>k__BackingField:
   - {fileID: 11400000, guid: f07ad6b1f442942438c14f86716c00c1, type: 2}
   - {fileID: 11400000, guid: c1fefde0f962cd940a236cc174ea7ff2, type: 2}
-  - {fileID: 11400000, guid: 07b43ba67879b7f4cb611dfeb0a67e82, type: 2}
-  - {fileID: 11400000, guid: 82bfc402b6190ef46bf9a5b2d608897f, type: 2}
-  - {fileID: 11400000, guid: 2c4060c589d4462419aa8226ed93e721, type: 2}
-  - {fileID: 11400000, guid: bd2c2ed476f92274491e90b9480214ad, type: 2}
-  - {fileID: 11400000, guid: cd25c3c87b30e0a4ba7739eaab954abe, type: 2}
-  - {fileID: 11400000, guid: 91648924642786f4092431bb5abae03b, type: 2}
   <HueChangeStep>k__BackingField: 0.1
   <HueChangeDelay>k__BackingField: 0.001
   <ColorTransitStep>k__BackingField: 0.01

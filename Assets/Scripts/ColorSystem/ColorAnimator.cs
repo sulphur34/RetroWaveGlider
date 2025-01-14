@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ColorSystem
@@ -7,17 +8,18 @@ namespace ColorSystem
     public class ColorAnimator : MonoBehaviour
     {
         private ColorAnimatorConfig _config;
-        private Dictionary<string, ColorData> _colorsData;
+        private List<ColorData> _colorsData;
         private Coroutine _coroutine;
         private int _schemeIndex;
         private int _maxIndex;
-        private int _nextSchemeIndex;
         private WaitForSeconds _hueDelay;
         private WaitForSeconds _transitDelay;
 
-        public IColorData GetColorData(string name)
+        private int NextSchemeIndex => (++_schemeIndex % _maxIndex + _maxIndex) % _maxIndex;
+
+        public IColorData GetColorData(ColorNames colorName)
         {
-            return _colorsData[name];
+            return _colorsData[(int)colorName];
         }
 
         public void Initialize(ColorAnimatorConfig config, int schemeIndex = 0)
@@ -26,18 +28,9 @@ namespace ColorSystem
             _hueDelay = new WaitForSeconds(_config.HueChangeDelay);
             _transitDelay = new WaitForSeconds(_config.ColorTransitDelay);
             _maxIndex = _config.ColorSchemes.Length - 1;
-            _schemeIndex = (schemeIndex % _maxIndex + _maxIndex) % _maxIndex;
-            _colorsData = new Dictionary<string, ColorData>();
-
-            foreach (ColorScheme colorScheme in _config.ColorSchemes)
-                colorScheme.Initialize();
-
-            foreach (var keyValuePair in _config.ColorSchemes[schemeIndex].Colors)
-            {
-                ColorData colorData = new ColorData(keyValuePair.Value);
-                _colorsData.Add(keyValuePair.Key, colorData);
-            }
-
+            _schemeIndex = schemeIndex;
+            _colorsData = _config.ColorSchemes[_schemeIndex].Colors.Select(color => new ColorData(color)).ToList();
+            
             LoopHue();
         }
 
@@ -58,7 +51,7 @@ namespace ColorSystem
             {
                 hueAdditionValue += _config.HueChangeStep * Time.deltaTime;
 
-                foreach (ColorData colorData in _colorsData.Values)
+                foreach (ColorData colorData in _colorsData)
                 {
                     colorData.AddHue(hueAdditionValue);
                 }
@@ -86,17 +79,16 @@ namespace ColorSystem
             {
                 interpolationValue += _config.ColorTransitStep;
 
-                foreach (string key in _colorsData.Keys)
+                for (int i = 0; i < _colorsData.Count; i++)
                 {
-                    ColorData colorData = _colorsData[key];
-                    Color targetColor = _config.ColorSchemes[_nextSchemeIndex].Colors[key];
-                    colorData.InterpolateColor(targetColor, interpolationValue);
+                    Color targetColor = _config.ColorSchemes[NextSchemeIndex].Colors[i];
+                    _colorsData[i].InterpolateColor(targetColor, interpolationValue);
                 }
 
                 yield return _transitDelay;
             }
 
-            _schemeIndex = (++_schemeIndex % _maxIndex + _maxIndex) % _maxIndex;
+            _schemeIndex = NextSchemeIndex;
             LoopHue();
         }
     }

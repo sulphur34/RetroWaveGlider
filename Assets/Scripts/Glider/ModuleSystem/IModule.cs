@@ -2,14 +2,7 @@
 {
     public interface IModule
     {
-        public void Activate()
-        {
-            
-        }
-
-        public void Deactivate()
-        {
-            
-        }
+        public void Activate();
+        public void Deactivate();
     }
 }

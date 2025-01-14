@@ -7,11 +7,6 @@ namespace ColorSystem.ColorTracker
     {
         private SpriteRenderer _spriteRenderer;
 
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         protected override void SetTracker()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();

@@ -33,9 +33,9 @@ namespace Glider.ModuleSystem.Shield
             Activate();
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collision.collider.TryGetComponent(out Enemy enemy) || collision.collider.TryGetComponent(out TerrainMesh terrainMesh))
+            if (collider.TryGetComponent(out Enemy enemy) || collider.TryGetComponent(out TerrainMesh terrainMesh))
             {
                 Collided?.Invoke();
                 Deactivate();
@@ -46,6 +46,8 @@ namespace Glider.ModuleSystem.Shield
         {
             _spriteRenderer = spriteRenderer;
             _circleCollider2D = circleCollider2D;
+            Collider2D parentCollider = GetComponentInParent<Collider2D>();
+            Physics2D.IgnoreCollision(_circleCollider2D, parentCollider);
             _shieldDuration = shieldDuration;
             _waitForSeconds = new WaitForSeconds(_disableCheckStep);
             ConcumeValue = concumeValue;
@@ -60,7 +62,7 @@ namespace Glider.ModuleSystem.Shield
             SetState(true);
         }
 
-        private void Deactivate()
+        public void Deactivate()
         {
             StopCoroutine(_coroutine);
             SetState(false);

@@ -2,19 +2,12 @@ using System.Collections.Generic;
 
 namespace ColorSystem
 {
-    public class ColorNames
+    public enum ColorNames : int
     {
-        public const string Glider = "Glider";
-        public const string EnemyOne = "EnemyOne";
-        public const string EnemyTwo = "EnemyTwo";
-        public const string Background = "Background";
-        public const string Obstacle = "Obstacle";
-
-        private static readonly List<string> _names = new List<string>()
-        {
-            Glider, EnemyOne, EnemyTwo, Background, Obstacle
-        };
-
-        public static IReadOnlyList<string> Names => _names;
+        Glider = 0,
+        EnemyOne = 1,
+        EnemyTwo = 2,
+        Background = 3,
+        Obstacle = 4
     }
 }
